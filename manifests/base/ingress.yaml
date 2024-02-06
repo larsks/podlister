@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: podlister
+  annotations:
+    route.openshift.io/termination: edge
+spec:
+  rules:
+  - host: podlister.apps.hypershift1.int.massopen.cloud
+    http:
+      paths:
+      - backend:
+          service:
+            name: podlister
+            port:
+              name: http
+        path: /
+        pathType: Prefix

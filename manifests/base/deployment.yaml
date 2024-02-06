@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podlister
+  annotations:
+    image.openshift.io/triggers: |
+      [
+       {
+         "from": {
+           "kind": "ImageStreamTag", 
+           "name": "podlister:latest",
+         },
+         "fieldPath": "spec.template.spec.containers[?(@.name==\"podlister\")].image", 
+         "paused": false
+       }
+      ]
+spec:
+  template:
+    metadata:
+      annotations:
+        alpha.image.policy.openshift.io/resolve-names: '*'
+    spec:
+      containers:
+        - name: podlister
+          image: podlister:latest
+          ports:
+            - name: http
+              containerPort: 8001
