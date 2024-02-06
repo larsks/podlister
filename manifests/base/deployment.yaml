@@ -20,6 +20,7 @@ spec:
       annotations:
         alpha.image.policy.openshift.io/resolve-names: '*'
     spec:
+      serviceAccountName: podlister
       containers:
         - name: podlister
           image: podlister:latest

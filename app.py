@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from kubernetes import client, config
 
 def create_app():
-    config.load_kube_config()
+    config.load_config()
     v1 = client.CoreV1Api()
     app = FastAPI()
 
